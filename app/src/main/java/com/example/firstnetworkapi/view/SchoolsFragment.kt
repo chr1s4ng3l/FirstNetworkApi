@@ -17,7 +17,9 @@ import com.example.firstnetworkapi.adapter.SchoolAdapter
 import com.example.firstnetworkapi.databinding.FragmentSchoolsBinding
 import com.example.firstnetworkapi.di.NetworkModule
 import com.example.firstnetworkapi.viewmodel.SchoolViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SchoolsFragment : Fragment() {
 
     private val binding by lazy {
@@ -59,8 +61,28 @@ class SchoolsFragment : Fragment() {
 
         }
 
-        schoolsViewModel.schoolModel.observe(viewLifecycleOwner) { state ->
-         
+        schoolsViewModel.schools.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is UIState.LOADING -> {
+                }
+                is UIState.SUCCESS -> {
+                    schoolAdapter.updateSchools(state.response)
+                }
+                is UIState.ERROR -> {
+                    AlertDialog.Builder(requireActivity())
+                        .setTitle("Error occurred")
+                        .setMessage(state.error.localizedMessage)
+                        .setPositiveButton("Retry") { dialog, _ ->
+                            schoolsViewModel.getAllSchools()
+                            dialog.dismiss()
+                        }
+                        .setNegativeButton("Dismiss") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .create()
+                        .show()
+                }
+            }
         }
 
         schoolsViewModel.getAllSchools()

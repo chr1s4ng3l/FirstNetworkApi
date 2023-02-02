@@ -10,8 +10,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.firstnetworkapi.databinding.FragmentDetailsBinding
 import com.example.firstnetworkapi.viewmodel.SchoolViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
 
 

@@ -22,25 +22,37 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SchoolViewModel @Inject constructor(
-    private val getSchool: GetSchool
+    private val serviceApi: ServiceApi,
 ) : ViewModel() {
 
-    val schoolModel = MutableLiveData<School?>()
-    val isLoading = MutableLiveData<Boolean>()
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val _schools: MutableLiveData<UIState> = MutableLiveData(UIState.LOADING)
+    val schools: LiveData<UIState> get() = _schools
 
     fun getAllSchools() {
+        viewModelScope.launch(ioDispatcher) {
+            _schools.postValue(UIState.LOADING)
 
-        viewModelScope.launch {
-            isLoading.postValue(true)
-            val result = getSchool()
-
-            if (!result.isNullOrEmpty()) {
-                schoolModel.postValue(result[0])
-                isLoading.postValue(false)
+            try {
+                val response = serviceApi.getAllSchools()
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        // this post value works in main thread and worker thread
+                        _schools.postValue(UIState.SUCCESS(it))
+                        withContext(Dispatchers.Main) {
+                            // this set value only works in the main thread
+                            // _schools.value = UIState.SUCCESS(it)
+                            Log.d(TAG, "onCreate: $it")
+                        }
+                    } ?: throw Exception("Error null schools response")
+                } else {
+                    throw Exception(response.errorBody()?.string())
+                }
+            } catch (e: Exception) {
+                _schools.postValue(UIState.ERROR(e))
+                Log.e(TAG, "onCreate: ${e.localizedMessage}", e)
             }
         }
-
     }
-
 
 }

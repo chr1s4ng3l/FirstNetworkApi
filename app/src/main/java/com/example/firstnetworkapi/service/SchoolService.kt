@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class SchoolService @Inject constructor(private val api:ServiceApi) {
 
-    suspend fun getSchools(): List<School> {
+    suspend fun getSchools(): List<SchoolsItem> {
         return withContext(Dispatchers.IO) {
             val response = api.getAllSchools()
             response.body() ?: emptyList()

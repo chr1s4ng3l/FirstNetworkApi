@@ -1,9 +1,9 @@
 package com.example.firstnetworkapi.service
 
-import com.example.firstnetworkapi.model.School
 import com.example.firstnetworkapi.model.SchoolsItem
 import retrofit2.Response
 import retrofit2.http.GET
+
 
 interface ServiceApi {
 
@@ -11,7 +11,7 @@ interface ServiceApi {
      * method to get the schools from server
      */
     @GET(SCHOOL_PATH)
-    suspend fun getAllSchools(): Response<List<School>>
+    suspend fun getAllSchools(): Response<List<SchoolsItem>>
 
     @GET(SAT_PATH)
     suspend fun getSat(): Response<List<SchoolsItem>>

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firstnetworkapi.databinding.LetterItemBinding
 import com.example.firstnetworkapi.databinding.SchoolItemBinding
+import com.example.firstnetworkapi.model.School
 import com.example.firstnetworkapi.model.SchoolsItem
 
 

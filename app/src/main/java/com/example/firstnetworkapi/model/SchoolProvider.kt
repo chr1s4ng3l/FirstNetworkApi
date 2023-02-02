@@ -7,5 +7,5 @@ import javax.inject.Singleton
 @Singleton
 class SchoolProvider @Inject constructor() {
 
-    var schools: List<School> = emptyList()
+    var schools: List<SchoolsItem> = emptyList()
 }

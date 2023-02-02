@@ -7,9 +7,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.firstnetworkapi.adapter.SchoolAdapter
 import com.example.firstnetworkapi.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 const val TAG = "MainActivity"
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null

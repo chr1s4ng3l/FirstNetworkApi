@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firstnetworkapi.databinding.LetterItemBinding
 import com.example.firstnetworkapi.databinding.SchoolItemBinding
-import com.example.firstnetworkapi.model.School
 import com.example.firstnetworkapi.model.SchoolsItem
 
 
@@ -77,7 +76,24 @@ class SchoolViewHolder(
     fun schoolBinding(school: SchoolsItem, onClickedSchool: (SchoolsItem) -> Unit) {
         binding.schoolName.text = school.schoolName
         binding.schoolAddress.text = school.location
+        //binding.schoolAddress.text = school.location?.substringBefore("(")
         binding.schoolPhone.text = school.phoneNumber
+
+        binding.schoolAddress.setOnClickListener {
+            println("============")
+
+            val location = school.location?.substringAfterLast("(")
+          val longitude = location?.substringBefore(",")
+            println("This is the longitude : $longitude")
+
+            println("============")
+            val latitude = school.location?.substringAfterLast(",")?.substringBefore(")")
+                  //latitude?.substringBeforeLast(")")
+            println("This is the latitude : $latitude")
+
+            println("============")
+
+        }
 
         binding.moreBtn.setOnClickListener {
             onClickedSchool(school)

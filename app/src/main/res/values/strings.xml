@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">FirstNetworkApi</string>
+    <string name="school_name">SCHOOL NAME</string>
+    <string name="address">ADDRESS</string>
+    <string name="phone_number">PHONE NUMBER</string>
+    <string name="more">MORE</string>
+    <string name="someOtherString">Other</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="schools_details">Schools Details</string>
+    <string name="boston_gmail_com">boston@gmail.com</string>
+    <string name="www_boston_us">www.boston.us</string>
+    <string name="school_description">This is the best college. Here you will learn a lot of topics</string>
+</resources>

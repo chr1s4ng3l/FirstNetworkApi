@@ -1,17 +1,24 @@
 package com.example.firstnetworkapi.adapter
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.firstnetworkapi.R
 import com.example.firstnetworkapi.databinding.LetterItemBinding
 import com.example.firstnetworkapi.databinding.SchoolItemBinding
 import com.example.firstnetworkapi.model.SchoolsItem
+import kotlinx.coroutines.NonDisposableHandle.parent
 
 
 class SchoolAdapter(
     private val schoolSet: MutableList<ViewType> = mutableListOf(),
     private val onClickedSchool: (SchoolsItem) -> Unit
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     fun updateSchools(newSchools: List<SchoolsItem>) {
@@ -29,6 +36,8 @@ class SchoolAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
+
         return if (viewType == 0) {
             LetterViewHolder(
                 LetterItemBinding.inflate(
@@ -49,7 +58,7 @@ class SchoolAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(val item = schoolSet[position]) {
+        when (val item = schoolSet[position]) {
             is ViewType.SCHOOL -> {
                 (holder as SchoolViewHolder).schoolBinding(item.schoolItem, onClickedSchool)
             }
@@ -62,7 +71,7 @@ class SchoolAdapter(
     override fun getItemCount(): Int = schoolSet.size
 
     override fun getItemViewType(position: Int): Int {
-        return when(schoolSet[position]) {
+        return when (schoolSet[position]) {
             is ViewType.SCHOOL -> 1
             is ViewType.LETTER -> 0
         }
@@ -73,25 +82,29 @@ class SchoolViewHolder(
     private val binding: SchoolItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
+
     fun schoolBinding(school: SchoolsItem, onClickedSchool: (SchoolsItem) -> Unit) {
         binding.schoolName.text = school.schoolName
-        binding.schoolAddress.text = school.location
-        //binding.schoolAddress.text = school.location?.substringBefore("(")
+        val address = school.location?.substringBefore("(")
+        binding.schoolAddress.text = address
         binding.schoolPhone.text = school.phoneNumber
 
+
+        binding.schoolPhone.setOnClickListener {
+
+            call(binding.schoolPhone.text.toString(), it.context)
+        }
+
         binding.schoolAddress.setOnClickListener {
-            println("============")
-
+            //Get the location
             val location = school.location?.substringAfterLast("(")
-          val longitude = location?.substringBefore(",")
-            println("This is the longitude : $longitude")
+            val latitude = location?.substringBefore(",")
+            println("This is the longitude : $latitude")
 
-            println("============")
-            val latitude = school.location?.substringAfterLast(",")?.substringBefore(")")
-                  //latitude?.substringBeforeLast(")")
-            println("This is the latitude : $latitude")
+            val longitude = school.location?.substringAfterLast(",")?.substringBefore(")")
+            println("This is the latitude : $longitude")
 
-            println("============")
+            goToGoogleMaps(latitude, longitude, address.toString(), it.context)
 
         }
 
@@ -101,6 +114,25 @@ class SchoolViewHolder(
         }
     }
 }
+
+// Go to call when you click the tvPhone
+fun call(phone: String, context: Context) {
+    val dialIntent = Intent(Intent.ACTION_DIAL)
+    dialIntent.data = Uri.parse("tel:$phone")
+    context.startActivity(dialIntent)
+}
+
+
+// Go to Google maps whe u click on teh tvAddress
+fun goToGoogleMaps(lat: String?, lon: String?, labelLocation: String, context: Context) {
+    val urlAddress =
+        "http://maps.google.com/maps?q=" + lat + "," + lon + "(" + labelLocation + ")&iwloc=A&hl=es"
+    val gmmIntentUri = Uri.parse(urlAddress)
+    val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+    mapIntent.setPackage("com.google.android.apps.maps")
+    context.startActivity(mapIntent)
+}
+
 
 class LetterViewHolder(
     private val binding: LetterItemBinding

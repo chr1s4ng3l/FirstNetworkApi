@@ -5,6 +5,7 @@
     android:elevation="5dp"
     android:layout_margin="10dp"
     android:padding="5dp"
+    android:backgroundTint="@color/graylight"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -17,26 +18,39 @@
         <TextView
             android:id="@+id/school_name"
             android:text="@string/school_name"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textIsSelectable="true"
+            />
 
         <TextView
             android:id="@+id/school_address"
-            android:text="@string/address"
-            android:textColor="@color/purple_200"
-            android:textStyle="bold"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:fontFamily="casual"
+            android:text="@string/address"
+            android:textSize="15sp"
+            android:layout_marginTop="2dp"
+            android:textStyle="bold"
+            />
 
         <TextView
             android:id="@+id/school_phone"
-            android:text="@string/phone_number"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="@string/phone_number"
+            android:textStyle="bold"
+            android:textColor="@color/gray"
+            />
 
         <Button
             android:id="@+id/more_btn"
             android:text="@string/more"
+            android:background="@drawable/buttom"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

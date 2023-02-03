@@ -2,28 +2,37 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/SchoolsFragment"
-    android:id="@+id/school_navigation">
+    android:id="@+id/school_navigation"
+    app:startDestination="@id/SchoolsFragment">
 
     <fragment
         android:id="@+id/SchoolsFragment"
         android:name="com.example.firstnetworkapi.view.SchoolsFragment"
-        tools:layout="@layout/fragment_schools"
-        android:label="NYC Schools">
+        android:label="NYC Schools"
+        tools:layout="@layout/fragment_schools">
 
         <action
             android:id="@+id/action_SchoolsFragment_to_DetailsFragment"
-            app:destination="@id/DetailsFragment" />
+            app:destination="@id/DetailsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
     <fragment
         android:id="@+id/DetailsFragment"
         android:name="com.example.firstnetworkapi.view.DetailsFragment"
-        tools:layout="@layout/fragment_details"
-        android:label="School Details">
+        android:label="School Details"
+        tools:layout="@layout/fragment_details">
         <action
             android:id="@+id/action_DetailsFragment_to_SchoolsFragment3"
-            app:destination="@id/SchoolsFragment" />
+            app:destination="@id/SchoolsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
     </fragment>
 
 </navigation>

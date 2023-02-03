@@ -22,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SchoolsFragment : Fragment() {
 
+
     private val binding by lazy {
         FragmentSchoolsBinding.inflate(layoutInflater)
     }
@@ -29,21 +30,17 @@ class SchoolsFragment : Fragment() {
     private val schoolAdapter by lazy {
         SchoolAdapter {
             findNavController().navigate(R.id.action_SchoolsFragment_to_DetailsFragment)
-            val bundle = Bundle()
-            bundle.putString("schoolName", it.schoolName.toString())
-            bundle.putString("schoolEmail", it.schoolEmail.toString())
-            bundle.putString("schoolWeb", it.website.toString())
-            bundle.putString("schoolDescription", it.overviewParagraph.toString())
+            schoolsViewModel.dbn = it.dbn.toString()
+            schoolsViewModel.web = it.website.toString()
+            schoolsViewModel.description = it.overviewParagraph.toString()
+            schoolsViewModel.email = it.schoolEmail.toString()
 
-            val fragment = DetailsFragment()
-            fragment.arguments = bundle
-            fragmentManager?.beginTransaction()?.replace(R.id.frag_container, fragment)?.commit()
 
     }
 
     }
 
-    private val schoolsViewModel: SchoolViewModel by viewModels()
+    private val schoolsViewModel: SchoolViewModel by activityViewModels()
 
 
     override fun onCreateView(

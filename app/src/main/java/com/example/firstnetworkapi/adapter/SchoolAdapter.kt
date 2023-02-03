@@ -12,6 +12,7 @@ import com.example.firstnetworkapi.R
 import com.example.firstnetworkapi.databinding.LetterItemBinding
 import com.example.firstnetworkapi.databinding.SchoolItemBinding
 import com.example.firstnetworkapi.model.SchoolsItem
+import com.example.firstnetworkapi.view.DetailsFragment
 import kotlinx.coroutines.NonDisposableHandle.parent
 
 
@@ -58,6 +59,7 @@ class SchoolAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
         when (val item = schoolSet[position]) {
             is ViewType.SCHOOL -> {
                 (holder as SchoolViewHolder).schoolBinding(item.schoolItem, onClickedSchool)
@@ -76,6 +78,7 @@ class SchoolAdapter(
             is ViewType.LETTER -> 0
         }
     }
+
 }
 
 class SchoolViewHolder(
@@ -126,7 +129,7 @@ fun call(phone: String, context: Context) {
 // Go to Google maps whe u click on teh tvAddress
 fun goToGoogleMaps(lat: String?, lon: String?, labelLocation: String, context: Context) {
     val urlAddress =
-        "http://maps.google.com/maps?q=" + lat + "," + lon + "(" + labelLocation + ")&iwloc=A&hl=es"
+        "http://maps.google.com/maps?q=$lat,$lon($labelLocation)&iwloc=A&hl=es"
     val gmmIntentUri = Uri.parse(urlAddress)
     val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
     mapIntent.setPackage("com.google.android.apps.maps")
@@ -141,4 +144,6 @@ class LetterViewHolder(
     fun bindLetter(letter: String) {
         binding.letterName.text = letter
     }
+
+
 }

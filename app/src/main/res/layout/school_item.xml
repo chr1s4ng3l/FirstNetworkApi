@@ -31,27 +31,48 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="casual"
+            android:clickable="true"
             android:text="@string/address"
             android:textSize="15sp"
             android:layout_marginTop="2dp"
             android:textStyle="bold"
             />
 
-        <TextView
-            android:id="@+id/school_phone"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="monospace"
-            android:text="@string/phone_number"
-            android:textStyle="bold"
-            android:textColor="@color/gray"
-            />
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:padding="2dp"
+                android:src="@drawable/phone"
+                android:layout_gravity="center"
+                android:contentDescription="@string/phoneicon"/>
+
+            <TextView
+                android:id="@+id/school_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="@string/phone_number"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:textColor="@color/gray"
+                />
+
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/more_btn"
             android:text="@string/more"
             android:background="@drawable/buttom"
-            android:layout_margin="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

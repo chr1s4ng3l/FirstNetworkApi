@@ -1,5 +1,6 @@
 package com.example.firstnetworkapi.service
 
+import com.example.firstnetworkapi.model.SatItem
 import com.example.firstnetworkapi.model.SchoolsItem
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,8 +14,9 @@ interface ServiceApi {
     @GET(SCHOOL_PATH)
     suspend fun getAllSchools(): Response<List<SchoolsItem>>
 
+
     @GET(SAT_PATH)
-    suspend fun getSat(): Response<List<SchoolsItem>>
+    suspend fun getSat(): Response<List<SatItem>>
 
     companion object {
         // https://data.cityofnewyork.us/resource/s3k6-pzi2.json

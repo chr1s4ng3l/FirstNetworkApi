@@ -1,4 +1,4 @@
-package domain
+package com.example.firstnetworkapi.domain
 
 import com.example.firstnetworkapi.model.SchoolProvider
 import com.example.firstnetworkapi.model.SchoolsItem

@@ -12,7 +12,7 @@ import com.example.firstnetworkapi.service.ServiceApi
 import com.example.firstnetworkapi.view.UIState
 import com.example.firstnetworkapi.view.UIStateSat
 import dagger.hilt.android.lifecycle.HiltViewModel
-import domain.GetSat
+import com.example.firstnetworkapi.domain.GetSat
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

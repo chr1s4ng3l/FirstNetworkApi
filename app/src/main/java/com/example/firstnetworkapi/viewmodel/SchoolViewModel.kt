@@ -36,6 +36,9 @@ class SchoolViewModel @Inject constructor(
 
     private val _satModel = MutableLiveData<SatItem?>()
     val satModel: LiveData<SatItem?> get() = _satModel
+
+    val isLoading = MutableLiveData<Boolean>()
+
     fun getAllSchools() {
         viewModelScope.launch(ioDispatcher) {
             _schools.postValue(UIState.LOADING)
@@ -62,14 +65,19 @@ class SchoolViewModel @Inject constructor(
         }
     }
 
+
+
+    //Get de sat information by dbn
     fun getAllSat() {
         viewModelScope.launch(ioDispatcher) {
+            isLoading.postValue(true)
             val result = getSat()
             val dbnA = dbn
             if (!result.isNullOrEmpty()) {
                 for (i in 0 until result.size){
                     if (dbnA.equals(result[i].dbn.toString())){
                         _satModel.postValue(result[i])
+                        isLoading.postValue(false)
                     }
                 }
 

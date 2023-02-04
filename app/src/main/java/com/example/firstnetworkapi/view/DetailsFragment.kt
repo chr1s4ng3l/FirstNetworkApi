@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import com.example.firstnetworkapi.databinding.FragmentDetailsBinding
 import com.example.firstnetworkapi.viewmodel.SchoolViewModel
@@ -37,6 +38,11 @@ class DetailsFragment : Fragment() {
             binding.textViewDescription.text = schoolsViewModel.description
             binding.textViewEmail.text = schoolsViewModel.email
             binding.textViewWeb.text = schoolsViewModel.web
+        }
+
+        schoolsViewModel.isLoading.observe(viewLifecycleOwner){
+            binding.progress.isVisible = it
+
         }
 
 
